@@ -16,8 +16,8 @@ public class Tester {
     private static PrintStream consoleOut;
     private static PrintStream silentOut;
 
-    public static void setup() {
-        testCases = new ArrayList<>(List.of(
+    public static void setupPart2() {
+        List<TestCase> cases = new ArrayList<>(List.of(
                 // --- TEST PUBBLICI (5) ---
                 new TestCase("30\n2\n1\n", "10.0", false),
                 new TestCase("30\n7\n1\n", "15.0", false),
@@ -37,6 +37,65 @@ public class Tester {
                 new TestCase("30\n7\n5\n", "11.0", true),
                 new TestCase("13\n7\n6\n", "6.5", true)
         ));
+
+        setup(cases);
+    }
+
+    public static void setupPart3() {
+        List<TestCase> cases = new ArrayList<>(List.of(
+                // --- TEST PUBBLICI (5) ---
+                // 1. Cuscino: 5, Stress: 1 (Tranquillo), Cappelli: 2 -> 10 + (5*1.5) + (2*3) = 10 + 7.5 + 6 = 23.5
+                new TestCase("5\n1\n2\n", "23.5", false),
+
+                // 2. Cuscino: 10, Stress: 2 (Stressato), Cappelli: 0 -> 10 + (10*1.5) + 12 = 10 + 15 + 12 = 37.0
+                new TestCase("10\n2\n0\n", "37.0", false),
+
+                // 3. Cuscino: 2, Stress: 3 (Crisi), Cappelli: 5 -> 10 + (2*1.5) + 25 + (5*3) = 10 + 3 + 25 + 15 = 53.0
+                new TestCase("2\n3\n5\n", "53.0", false),
+
+                // 4. Cuscino: 0, Stress: 1, Cappelli: 0 -> 10.0
+                new TestCase("0\n1\n0\n", "10.0", false),
+
+                // 5. Cuscino: 50, Stress: 3, Cappelli: 7 -> 10 + (50*1.5) + 25 + (7*3) = 10 + 75 + 25 + 21 = 131.0 -> max 100.0
+                new TestCase("50\n3\n7\n", "100.0", false),
+
+                // --- TEST SEGRETI (10) ---
+                // 6. Cuscino: 4, Stress: 2, Cappelli: 3 -> 10 + 6 + 12 + 9 = 37.0
+                new TestCase("4\n2\n3\n", "37.0", true),
+
+                // 7. Cuscino: 15, Stress: 1, Cappelli: 1 -> 10 + 22.5 + 3 = 35.5
+                new TestCase("15\n1\n1\n", "35.5", true),
+
+                // 8. Cuscino: 8, Stress: 3, Cappelli: 4 -> 10 + 12 + 25 + 12 = 59.0
+                new TestCase("8\n3\n4\n", "59.0", true),
+
+                // 9. Cuscino: -7, Stress: 2, Cappelli: 6 -> 10 + 12 + 18 = 40.0
+                new TestCase("-7\n2\n6\n", "40.0", true),
+
+                // 10. Cuscino: 20, Stress: 3, Cappelli: 0 -> 10 + 30 + 25 = 65.0
+                new TestCase("20\n3\n0\n", "65.0", true),
+
+                // 11. Cuscino: 1, Stress: 1, Cappelli: 0 -> 10 + 1.5 = 11.5
+                new TestCase("1\n1\n0\n", "11.5", true),
+
+                // 12. Cuscino: 30, Stress: 2, Cappelli: 5 -> 10 + 45 + 12 + 15 = 82.0
+                new TestCase("30\n2\n5\n", "82.0", true),
+
+                // 13. Cuscino: 6, Stress: 3, Cappelli: 2 -> 10 + 9 + 25 + 6 = 50.0
+                new TestCase("6\n3\n2\n", "50.0", true),
+
+                // 14. Cuscino: 12, Stress: 2, Cappelli: 4 -> 10 + 18 + 12 + 12 = 52.0
+                new TestCase("12\n2\n4\n", "52.0", true),
+
+                // 15. Cuscino: 60, Stress: 3, Cappelli: 7 -> Supera 100 -> 100.0
+                new TestCase("60\n3\n7\n", "100.0", true)
+        ));
+
+        setup(cases);
+    }
+
+    public static void setup(List<TestCase> cases) {
+        testCases = cases;
 
         testCases.sort(Comparator.comparing(TestCase::isSecret));
 

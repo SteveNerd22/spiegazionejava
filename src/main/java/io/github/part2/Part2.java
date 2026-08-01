@@ -43,7 +43,7 @@ public class Part2 {
     // NON TOCCARE IL MAIN, serve per i test!
 
     public static void main(String[] args) {
-        Tester.setup();
+        Tester.setupPart2();
         Tester.verify(Part2::part2);
     }
 }
