@@ -1,7 +1,8 @@
 package io.github.part2;
 
 import io.github.helper.Read;
-import io.github.helper.Tester;
+import io.github.helper.tester.Tester;
+import io.github.helper.tester.data.TestCaseRepository;
 
 public class Part2 {
 
@@ -43,7 +44,10 @@ public class Part2 {
     // NON TOCCARE IL MAIN, serve per i test!
 
     public static void main(String[] args) {
-        Tester.setupPart2();
-        Tester.verify(Part2::part2);
+        Tester tester = Tester.builder()
+                .targetClass(Part2.class)
+                .testCases(TestCaseRepository.part2())
+                .build();
+        tester.verify(Part2::part2);
     }
 }

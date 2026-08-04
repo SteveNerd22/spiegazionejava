@@ -1,7 +1,11 @@
 package io.github.part3;
 
 import io.github.helper.Read;
-import io.github.helper.Tester;
+import io.github.helper.tester.StructuralCheck;
+import io.github.helper.tester.TestCase;
+import io.github.helper.tester.Tester;
+import io.github.helper.tester.data.TestCaseRepository;
+import io.github.part2.Part2;
 
 public class Part3 {
 
@@ -43,7 +47,10 @@ public class Part3 {
     // NON TOCCARE IL MAIN, serve per i test!
 
     public static void main(String[] args) {
-        Tester.setupPart3();
-        Tester.verify(Part3::part3);
+        Tester tester = Tester.builder()
+                .targetClass(Part3.class)
+                .testCases(TestCaseRepository.part3())
+                .build();
+        tester.verify(Part3::part3);
     }
 }
