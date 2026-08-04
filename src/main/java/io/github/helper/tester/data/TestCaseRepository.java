@@ -69,4 +69,53 @@ public final class TestCaseRepository {
                 TestCase.secret("100.0", 60, 3, 7)
         );
     }
+
+    public static List<TestCase> part4(String test) {
+        return switch (test) {
+            case "test1" -> List.of(
+                    // --- TEST PUBBLICI (Test1: Rombo) ---
+                    TestCase.pub("*##\n**##\n***##\n**##\n*##\n", 5),
+                    TestCase.pub("*##\n", 1),
+                    TestCase.pub("", 0),
+
+                    // --- TEST SEGRETI (Test1) ---
+                    TestCase.secret("*##\n**##\n***##\n****##\n***##\n**##\n*##\n", 7),
+                    TestCase.secret("*##\n**##\n*##\n", 3),
+                    TestCase.secret("*##\n**##\n***##\n****##\n*****##\n******##\n*******##\n******##\n*****##\n****##\n***##\n**##\n*##\n", 13),
+                    TestCase.secret("", 4),
+                    TestCase.secret("", -3)
+            );
+            case "test2" -> List.of(
+                    // --- TEST PUBBLICI (Test2: Cornice Doppia) ---
+                    TestCase.pub("@@@@@@\n@----@\n@----@\n@@@@@@\n", 6, 4),
+                    TestCase.pub("@@@\n@@@\n", 3, 2),
+                    TestCase.pub("", 3, -4),
+
+                    // --- TEST SEGRETI (Test2) ---
+                    TestCase.secret("@@@@\n@--@\n@--@\n@@@@\n", 4, 4),
+                    TestCase.secret("@@@@@@@@\n@------@\n@@@@@@@@\n", 8, 3),
+                    TestCase.secret("@@@@@\n@---@\n@---@\n@---@\n@@@@@\n", 5, 5),
+                    TestCase.secret("@@\n@@\n", 2, 2),
+                    TestCase.secret("@\n@\n@\n@\n", 1, 4),
+                    TestCase.secret("@@@@@@@\n", 7, 1),
+                    TestCase.secret("", 5, 0),
+                    TestCase.secret("", 0, 5)
+            );
+            case "test3" -> List.of(
+                    // --- TEST PUBBLICI (Test3: Matrice Scivolante) ---
+                    TestCase.pub("1243\n2341\n3412\n4123\n1234\n", 4),
+                    TestCase.pub("12345678910\n23456789101\n34567891012\n45678910123\n56789101234\n67891012345\n78910123456\n89101234567\n91012345678\n10123456789\n12345678910\n", 10),
+                    TestCase.pub("", -10),
+
+                    // --- TEST SEGRETI (Test3) ---
+                    TestCase.secret("123\n231\n312\n123\n", 3),
+                    TestCase.secret("12\n21\n12\n", 2),
+                    TestCase.secret("12345\n23451\n34512\n45123\n51234\n12345\n", 5),
+                    TestCase.secret("", 1),
+                    TestCase.secret("", 0),
+                    TestCase.secret("", -7)
+            );
+            default -> throw new IllegalArgumentException("Test sconosciuto in part4: " + test);
+        };
+    }
 }
